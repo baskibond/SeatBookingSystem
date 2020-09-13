@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "bf8ffc57-1791-43f7-97fd-82e8c6a12d1c",
+		"name": "seatbooking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/v1/ping",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kuldeeppp\",\n    \"email\":\"baskibondddd@gmail.com\",\n    \"phone\":\"1234567891as\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"3 idiots\",\n    \"director\":\"raju hirani\",\n    \"duration\":\"250\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/movie",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/v1/movie/50",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"movie",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddTheatre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Kino\",\n    \"city\":\"Pune\",\n    \"noOfSeates\":\"4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/theatre",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"theatre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Screen",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"movieId\":50,\n    \"theatreId\":43\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/screen",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"screen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"screenId\":67,\n    \"userId\":1,\n    \"seats\":[\n        69\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/booking",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getuser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kuldeep\",\n    \"email\":\"baskibond@gmail.com\",\n    \"phone\":\"1234567891\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/user/48",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"48"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Theatre",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kuldeep\",\n    \"email\":\"baskibond@gmail.com\",\n    \"phone\":\"1234567891\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/theatre/40",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"theatre",
+						"40"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  booked seat list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kuldeep\",\n    \"email\":\"baskibond@gmail.com\",\n    \"phone\":\"1234567891\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/screen/67/booked",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"screen",
+						"67",
+						"booked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  unkooed seat list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kuldeep\",\n    \"email\":\"baskibond@gmail.com\",\n    \"phone\":\"1234567891\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/screen/67/unbooked",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"screen",
+						"67",
+						"unbooked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  locked seat list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kuldeep\",\n    \"email\":\"baskibond@gmail.com\",\n    \"phone\":\"1234567891\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/screen/67/progress",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"screen",
+						"67",
+						"progress"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -56,7 +56,7 @@ public class TheatreService {
             }
             return screenRepo.save(screening);
         }
-        throw new BookingException();
+        throw new BookingException("Bad Data, Either Theatre or Movie does not exists");
     }
 
     public Optional<Screening> getScreen(int screenId) {

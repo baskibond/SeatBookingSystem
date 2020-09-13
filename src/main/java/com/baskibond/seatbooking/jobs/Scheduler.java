@@ -5,6 +5,8 @@ import com.baskibond.seatbooking.entities.Seat;
 import com.baskibond.seatbooking.models.PaymentStatus;
 import com.baskibond.seatbooking.repositories.BookingRepo;
 import com.baskibond.seatbooking.repositories.SeatRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,6 +21,8 @@ import java.util.List;
 @EnableTransactionManagement
 public class Scheduler {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     BookingRepo bookingRepo;
 
@@ -26,40 +30,46 @@ public class Scheduler {
     SeatRepo seatRepo;
 
     @Transactional
-    @Scheduled(fixedDelay = 100000, initialDelay = 100000)
-    public void scheduleFixedDelayTask() {
-        System.out.println(
-                "Fixed delay task - " + System.currentTimeMillis() / 1000);
-
-        List<Booking> bookingList=bookingRepo.findAllUnpaidAndLocked(PaymentStatus.UNPAID.toString());
-        List<Seat> seatList;
-        for(Booking booking:bookingList){
-            seatList=booking.getSeats();
-            for(Seat seat: seatList){
-                seat.setLocked(false);
-                seatRepo.save(seat);
+    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
+    public void scheduleUnbloackTask() {
+        LOGGER.info("Job Started to unblock the seats which have being locked and payment not completed within 10 mins");
+        try{
+            List<Booking> bookingList=bookingRepo.findAllUnpaidAndLocked(PaymentStatus.UNPAID.toString());
+            List<Seat> seatList;
+            for(Booking booking:bookingList){
+                seatList=booking.getSeats();
+                for(Seat seat: seatList){
+                    seat.setLocked(false);
+                    seatRepo.save(seat);
+                }
+                bookingRepo.save(booking);
             }
-            bookingRepo.save(booking);
+        }catch (Exception e){
+            LOGGER.error("Exception Occurred : "+e.getMessage());
         }
+        LOGGER.info("Job scheduleUnbloackTask Ended");
     }
 
     @Transactional
     @Scheduled(fixedDelay = 10000, initialDelay = 10000)
     public void scheduleFixedDelayTaskOfMarkingPaid() {
-        System.out.println(
-                "Fixed delay task - " + System.currentTimeMillis() / 1000);
-
-        List<Booking> bookingList=bookingRepo.findAllUnpaidAndLocked(PaymentStatus.UNPAID.toString());
-        List<Seat> seatList;
-        for(Booking booking:bookingList){
-            seatList=booking.getSeats();
-            for(Seat seat: seatList){
-                seat.setBooked(true);
-                seat.setLocked(false);
-                seatRepo.save(seat);
+        LOGGER.info("Job to act as Stub for payment system started");
+        try{
+            List<Booking> bookingList=bookingRepo.findAllUnpaidAndLocked(PaymentStatus.UNPAID.toString());
+            List<Seat> seatList;
+            for(Booking booking:bookingList){
+                seatList=booking.getSeats();
+                for(Seat seat: seatList){
+                    seat.setBooked(true);
+                    seat.setLocked(false);
+                    seatRepo.save(seat);
+                }
+                booking.setPayment_status(PaymentStatus.PAID);
+                bookingRepo.save(booking);
             }
-            booking.setPayment_status(PaymentStatus.PAID);
-            bookingRepo.save(booking);
+        }catch (Exception e){
+            LOGGER.error("Exception Occurred : "+e.getMessage());
         }
+        LOGGER.error("Job scheduleFixedDelayTaskOfMarkingPaid ended");
     }
 }

@@ -13,7 +13,6 @@ public class UserService {
     UserRepo userRepo;
 
     public User addUser(User user){
-        user.getEmail();
         userRepo.save(user);
         return user;
     }

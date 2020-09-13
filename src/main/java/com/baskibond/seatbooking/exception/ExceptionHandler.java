@@ -27,4 +27,12 @@ public class ExceptionHandler {
 
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    protected ResponseEntity handleGenericExceptin(Exception ex) {
+        LOGGER.info("Generic Exception is thrown");
+        ResponseData responseData=new ResponseData(false,ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(),null);
+        return new ResponseEntity(responseData,HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
 }
